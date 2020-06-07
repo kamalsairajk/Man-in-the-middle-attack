@@ -1,0 +1,132 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose,tmargin=1.4in,bmargin=1.4in,lmargin=1.4in,rmargin=1.4in}
+\usepackage[nodisplayskipstretch,doublespacing]{setspace}
+\setstretch{2}
+\usepackage{siunitx} % All the SI unit nomenclature
+  \sisetup{per=slash, load=abbr, output-complex-root = j, complex-root-position = before-number}
+\newcommand{\E}{\varepsilon}  % epsilon
+\title{Man in the middle attack}
+
+\author{Kamal Sai Raj K (E16CSE028),Tirdesh P(E16CSE038)}
+\date{November 2019}
+\usepackage{natbib}
+\usepackage{graphicx}
+\begin{document}
+
+\maketitle
+
+\section{Abstract}
+Man in the middle attack is an attack where the attacker places himself between the client & server i.e., all the packets that are sent to server will be routed to  the attacker and the attacker will send these to the server, then the packets returned from server to attacker will be routed to the client. The attacker is like a middle person and he can gain sensitive information or manipulate the packets to his will. This attack could also be done by creating fake network that the attacker controls and traffic can be rerouted to a phishing site.The attacker acts a bridge between the client and server.The purpose of this paper is to design a perform a MITM attack in a LAN using ARP spoofing.
+\section{Introduction}
+In the age of this modern era, MITM remains as a prevalent network attack due to its simplistic approach. As explained earlier it is just that the attacker will be eavesdropping the communication between the client and server. Most of the MITM attacks were based on wi-fi connections. The attacker/hacker will setup a wifi connection that sounds legit, and he/she just has to wait for the client  to fall into his trap by connnecting to this wifi.As soon as the client gets connected to the network, the attacker will start rerouting his packets as a legitimate user and intercepts the information shared in between.
+One more type of MITM attack is to use spoofing technique to make the client think that he/she is connected to the server but where as in reality the packets are being intercepted by the attacker and transferred in a to and fro motion.
+ARP being a stateless protocol and without cache having a security mechanism makes the MITM attack using ARP very easy.The mechanism of MITM being spoofing a packet, the attacker/hacker sends the spoofed ARP packets on LAN, to associate his/her own machine mac addess with ip address of other host.The forged packet can also be a ping to host.Now, the traffic originating from host will be sent to the attacker, and he'll be fooling the host/client by acting as a legitimate server.
+\section{Literature Survey}
+MITM is named for the game of ball where two people play catch while a third person in the middle attempts
+to intercept the ball. MITM is also used as a fire brigade attack, a term derived from the emergency
+process of passing water buckets to put out a fire. In the year 2004, U. Meyer and S. Wetzel presented a
+report on Universal Mobile Telecommunication System’s (UITM) security protocol where the authors discussed about ‘men-in-the-middle-attack’ on mobile communication (Meyer & Wetzel, 2004)\citep{meyer2004man}. In 2006,
+Kish published his research in a master listed journal where he showed an encryption method of MITM
+using Kirchhoff-loop-Johnson (-like)-noise cipher (Kish, 2006)\citep{kish2006protection}. Hypponen and Haataja (2007)\citep{hypponen2007nino}, made a research on secure Bluetooth communication and showed their developed system was capable of preventing MITM attack (Hypponen & Haataja, 2007). Sun et al., 2018 \citep{sun2018man}and Saif et al., 2018\citep{saif2018implementation}; made similar
+type of researches on updated version of Bluetooth networks security and discussed about new techniques
+to prevent MITM in two party’s communication Sun et al., 2018 \citep{sun2018man}and Saif et al., 2018\citep{saif2018implementation}. Ouafi et al. (2008)\citep{ouafi2008security},
+Callegati et al. (2009)\citep{callegati2009man}, Joshi et al., (2009)\citep{joshi2009mitigating}, Desmedt, (2011)\citep{desmedt2011man} and Sounthiraraj et al., (2014)\citep{sounthiraraj2014smv} conducted
+researches about HTTP security and those researches found MITM as a very serious threat and those also
+discussed about the prevention techniques Ouafi et al. (2008)\citep{ouafi2008security},
+Callegati et al. (2009)\citep{callegati2009man}, Joshi et al., (2009)\citep{joshi2009mitigating}, Desmedt, (2011)\citep{desmedt2011man} and Sounthiraraj et al., (2014)\citep{sounthiraraj2014smv} 
+
+
+
+
+
+
+
+\section{Proposed Method}
+The technique we have used  for performing man in the middle attack is ARP poisoning which is one of the most effective strategy to perform man in the middle attack.
+The insecure nature of the ARP protocol is used in poisoning . Devices using ARP will accept updates at any time which is disadvantageous as unlike protocols such as DNS that can be configured to only accept secured dynamic updates. This simply means  that any device can send an ARP reply packet to another host and force that host to update its ARP cache with the new value. 
+Sending a gratuitous ARP means sending an ARP reply when no request has been generated . Few well placed gratuitous ARP packets which are present with malicious intent would result in hosts who think they are communicating with one host, but in reality are communicating with a listening attacker.
+An attempt which is undetectable to the user is an effective ARP poisoning attempt. ARP poisoning is very effective against wireless networks. By starting an ARP poisoning attack which can further lead to being man in the middle attack, hackers can steal highly-sensitive data from the targeted computers
+In this attack attackers machine send ARP spoofed packets to victims machine using python scapy script, IP address and the network gateway of the wireless interface, which makes the victim think that attacker machine is the router and also send ARP spoof packets to router to make it think that the attacker machine is the victim. This poisons the ARP table of the victims machine and router. After the script is run then attacker can use packet capturing tools like Wireshark to capture any packet of the victim.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=100mm,scale=1.7]{Capture1.PNG}
+\caption{Man in the middle attack}
+\label{fig:universe}
+\end{figure}
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=100mm,scale=1.7]{ad.png}
+\caption{Activity flow}
+\label{fig:universe}
+\end{figure}
+
+\newpage
+\section{Experiments and results}
+\subsection{Dataset and tools information}
+There isn’t  a dataset that we have used. But the details of the data that is captured from the victim machine through the attacker machine and is stored in a pcap file which is further analyzed.
+Attacker Machine : Kali-linux,
+Tools:  python-scapy( used for creating attack), driftnet, urlsnarf, wireshark ( used for packet capture).
+Victim Machine : Windows 10,
+Tools: Command prompt (to provide input and check test case) ,Browser (to test use case).
+Smartphone  : Wifi-hotspot ( to provide network).
+\subsection{Experiment Setup}
+
+The setup consists of two personal computers and a routing device which can provide network which in case we have a taken personal hotspot of a smartphone. One personal computer is the attacker machine which is configured with Kali-linux system and the other is the victim machine which is equipped with Windows.
+
+\textbf{Steps for Man in the middle attack}
+
+\begin{enumerate}
+ \item Once the IP address and the network gateway of the wireless interface of the victim machine are known we can perform the MITM attack.  We have created python script file for attack. 
+ \item For checking purposes we have check the ARP table on command prompt of the victim machine. First the ARP table will be configured with routers mac address, in our case that will be the smartphone’s mac as it is providing the network. 
+ \item We run the attack script on the machine then we wait for some time. Then we check the ARP table on the victim machine which will be changed to attackers mac address. We ensure that port forwarding on the attackers machine to ensure that the victims machine is connected to internet. 
+ \item Now attackers machine has access to all the information to passing from victims machine. We use tools like wireshark to capture these packets and access the information. We can also use tools like driftnet and urlsnarf to get further information.  
+
+\end{enumerate}
+\subsection{Results}
+First the details are captured of the attacker machine like IP address and Network gateway.
+Interface : 192.168.41.1,Ip address of the attacker Machine : 192.168.43.94,
+Attackers Mac address: d8-9c-67-17-d5-8d.
+
+The ARP table is checked before and after the attack is performed.(Fig 3)
+\begin{figure}[h!]
+\centering
+\includegraphics[width=140mm,scale=1.7]{2.jpeg}
+\caption{ARP table}
+\label{fig:universe}
+\end{figure}
+
+Now the victim machine thinks the attacker is the router that we can see in the picture above.So the packets that are sent to victims machine are captured by the attacker machine .
+Now for testing the attack we would like to gather information like login details from a particular website like LMS of Bennett University for instance.(Fig 4)
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=140mm,scale=1.7]{Capture.PNG}
+\caption{Test case}
+\label{fig:universe}
+\end{figure}
+
+
+Also the tools used like the Wireshark to capture packets from the victims machine (Fig 5)
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=140mm,scale=1.7]{1.png}
+\caption{Result}
+\label{fig:universe}
+\end{figure}
+
+\section{Limitations}
+We couldn’t successfully implement this on multiple systems as we had lack of computers. Also we couldn’t use this on popular websites like google, facebook and many more as the packets captured form these websites are heavily encrypted as we used a website like LMS that uses plain text. Also we couldn’t use this on a router that is robust to such type of attacks as we have a personal wifi hotspot in our case.
+\section{Future Work}
+We would like to implement this attack in a much larger scale which has more computers and a robust router. We would like to try this out on many other router which are available in public for free. Also we would like to implement a prevention measure that prevents the attack from being happening.
+\section{Conclusion}
+We have succesfully completed a MITM attack using ARP spoofing and poisining.We created a personal hotspot and connected two devices on the same network. By spoofing we were able to gain lms access credentials and also the network traffic is captured & visualised in wireshark. We also learnt about the vulnerabilities of a system so that the MITM can be performed. We are looking forward to try DNS MITM, SSL MITM and other MITM attacks in the future.
+
+
+\bibliographystyle{plain}
+\bibliography{mybibfile1}
+\end{document}
