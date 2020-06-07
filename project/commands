@@ -1,0 +1,12 @@
+kalicommands 
+
+ifconfig
+driftnet -i wlan0
+urlsnarf -i wlan0
+python mitm2.py
+
+
+windows 
+ipconfig
+arp -a 
+netsh interface ip delete arpcache
